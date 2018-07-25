@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.HouseMapper">
+	<resultMap type="House" id="houseResultMap">
+		<id column="id" property="id"/>
+		<result column="hname" property="hname"/>
+		<result column="size" property="size"/>
+		<result column="beds" property="beds"/>
+		<result column="price" property="price"/>
+		<result column="dis" property="dis"/>
+		<result column="info" property="info"/>
+		<result column="pica" property="pica"/>
+		<result column="picb" property="picb"/>
+		<result column="picc" property="picc"/>
+		<result column="picd" property="picd"/>
+		<result column="pice" property="pice"/>
+		<result column="picf" property="picf"/>
+		<result column="status" property="status"/>
+		<association property="kind" javaType="Kind">
+			<id column="kid" property="id"/>
+			<result column="name" property="name"/>
+			<result column="icon" property="icon"/>
+			<result column="kinfo" property="info"/>
+			<result column="kstatus" property="status"/>
+		</association>
+	</resultMap>
+	<select id="selectOne" parameterType="int" resultMap="houseResultMap">
+		select 
+		a.id kid,a.name,a.icon,a.info kinfo,a.status kstatus,b.* 
+		from kind a right join house b on a.id=b.kid
+		where b.id=#{0} and b.status!=-1
+	</select>
+	<select id="select" parameterType="map" resultMap="houseResultMap">
+		select 
+		a.id kid,a.name,a.icon,a.info kinfo,a.status kstatus,b.* 
+		from kind a right join house b on a.id=b.kid
+		where b.status!=-1
+		<if test="kid!=null">
+			and b.kid=#{kid}
+		</if>
+		<if test="beds!=null">
+			and b.beds=#{beds}
+		</if>
+	</select>
+	<insert id="insert" parameterType="House">
+		insert into house(hname,kid,size,beds,price,dis,info,pica,picb,picc,picd,pice,picf) values(#{hname},#{kind.id},#{size},#{beds},#{price},#{dis},#{info},#{pica},#{picb},#{picc},#{picd},#{pice},#{picf})
+	</insert>
+	<update id="enable" parameterType="House">
+		update house set status=#{status} where id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		update house set status=-1 where id=#{0}
+	</delete>
+	<update id="update" parameterType="House">
+		update house set hname=#{hname},kid=#{kind.id},size=#{size},beds=#{beds},price=#{price},dis=#{dis},info=#{info},pica=#{pica},picb=#{picb},picc=#{picc},picd=#{picd},pice=#{pice},picf=#{picf} where id=#{id}
+	</update>
+</mapper>
