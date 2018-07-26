@@ -1,6 +1,7 @@
 package com.orilore.model;
 public class House{
 	private Kind kind;
+	private int kid;
 	private String hname;
 	private Integer beds;
 	private Integer id;
@@ -115,5 +116,13 @@ public class House{
 
 	public void setKind(Kind kind) {
 		this.kind = kind;
+	}
+
+	public int getKid() {
+		return kid;
+	}
+
+	public void setKid(int kid) {
+		this.kid = kid;
 	}
 }

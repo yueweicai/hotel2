@@ -1,5 +1,7 @@
 package com.orilore.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -59,8 +63,33 @@ public class HouseCtrl {
 	}
 	
 	@RequestMapping("/save")
-	public boolean save(House bean){
-		return biz.save(bean);
+	public House save(House bean){
+		if(biz.save(bean)){
+			return bean;
+		}else{
+			return null;
+		}
+	}
+	
+	
+	@RequestMapping("/uploads")
+	public int upload(@RequestParam("files[]") MultipartFile[] files,HttpServletRequest request){
+		String abs = request.getSession().getServletContext().getRealPath("/images");
+		int n = 0, m = 0;
+		for(MultipartFile file : files){
+			n++;
+			String oname = file.getOriginalFilename();
+			String ext = oname.substring(oname.lastIndexOf("."));
+			String name = System.currentTimeMillis()+n+ext;
+			File dest = new File(abs+"\\"+name);
+			try {
+				file.transferTo(dest);
+				m++;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return m;
 	}
 	
 	@RequestMapping("/enable/{id}/{status}")

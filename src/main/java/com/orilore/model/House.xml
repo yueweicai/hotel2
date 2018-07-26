@@ -43,8 +43,8 @@
 			and b.beds=#{beds}
 		</if>
 	</select>
-	<insert id="insert" parameterType="House">
-		insert into house(hname,kid,size,beds,price,dis,info,pica,picb,picc,picd,pice,picf) values(#{hname},#{kind.id},#{size},#{beds},#{price},#{dis},#{info},#{pica},#{picb},#{picc},#{picd},#{pice},#{picf})
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="House">
+		insert into house(hname,kid,size,beds,price,dis,info,pica,picb,picc,picd,pice,picf) values(#{hname},#{kid},#{size},#{beds},#{price},#{dis},#{info},#{pica},#{picb},#{picc},#{picd},#{pice},#{picf})
 	</insert>
 	<update id="enable" parameterType="House">
 		update house set status=#{status} where id=#{id}
@@ -53,6 +53,6 @@
 		update house set status=-1 where id=#{0}
 	</delete>
 	<update id="update" parameterType="House">
-		update house set hname=#{hname},kid=#{kind.id},size=#{size},beds=#{beds},price=#{price},dis=#{dis},info=#{info},pica=#{pica},picb=#{picb},picc=#{picc},picd=#{picd},pice=#{pice},picf=#{picf} where id=#{id}
+		update house set hname=#{hname},kid=#{kid},size=#{size},beds=#{beds},price=#{price},dis=#{dis},info=#{info},pica=#{pica},picb=#{picb},picc=#{picc},picd=#{picd},pice=#{pice},picf=#{picf} where id=#{id}
 	</update>
 </mapper>
