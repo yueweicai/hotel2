@@ -42,5 +42,10 @@ public class HouseBiz implements IHouseBiz{
 		bean.setStatus(status);
 		return this.mapper.enable(bean);
 	}
+
+	@Override
+	public boolean updateImage(House bean) {
+		return this.mapper.updateImage(bean);
+	}
 }
 

@@ -12,5 +12,6 @@ public interface HouseMapper{
 	public boolean update(House bean);
 	public House selectOne(Integer id);
 	public boolean enable(House bean);
+	public boolean updateImage(House bean);
 	public List<House> select(Map<String,Object> map);
 }

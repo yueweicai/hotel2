@@ -52,7 +52,16 @@
 	<delete id="delete" parameterType="int">
 		update house set status=-1 where id=#{0}
 	</delete>
+	<update id="updateImage" parameterType="House">
+		update house set 
+		<if test="pica!=null">pica=#{pica},</if>
+		<if test="picb!=null">picb=#{picb},</if>
+		<if test="picc!=null">picc=#{picc},</if>
+		<if test="picd!=null">picd=#{picd},</if>
+		id=#{id}
+		where id=#{id}
+	</update>
 	<update id="update" parameterType="House">
-		update house set hname=#{hname},kid=#{kid},size=#{size},beds=#{beds},price=#{price},dis=#{dis},info=#{info},pica=#{pica},picb=#{picb},picc=#{picc},picd=#{picd},pice=#{pice},picf=#{picf} where id=#{id}
+		update house set hname=#{hname},kid=#{kid},size=#{size},beds=#{beds},price=#{price},dis=#{dis},info=#{info} where id=#{id}
 	</update>
 </mapper>

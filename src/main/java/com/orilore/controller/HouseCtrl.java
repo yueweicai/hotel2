@@ -20,6 +20,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.orilore.biz.IHouseBiz;
 import com.orilore.model.House;
+import com.orilore.util.Uploader;
 
 @RestController
 @RequestMapping("/house")
@@ -71,25 +72,39 @@ public class HouseCtrl {
 		}
 	}
 	
-	
 	@RequestMapping("/uploads")
-	public int upload(@RequestParam("files[]") MultipartFile[] files,HttpServletRequest request){
-		String abs = request.getSession().getServletContext().getRealPath("/images");
-		int n = 0, m = 0;
-		for(MultipartFile file : files){
-			n++;
-			String oname = file.getOriginalFilename();
-			String ext = oname.substring(oname.lastIndexOf("."));
-			String name = System.currentTimeMillis()+n+ext;
-			File dest = new File(abs+"\\"+name);
-			try {
-				file.transferTo(dest);
-				m++;
-			} catch (Exception e) {
-				e.printStackTrace();
+	public boolean upload(MultipartFile pica,MultipartFile picb,MultipartFile picc,MultipartFile picd,HttpServletRequest request){
+		//获取图片存储的绝对系统路径
+		String path = request.getSession().getServletContext().getRealPath("/images");
+		//获取客房id号
+		String hid = request.getParameter("id");
+		House bean = new House();
+		bean.setId(Integer.parseInt(hid));
+		if(pica!=null && pica.getSize()>0){
+			String pa = Uploader.upload(pica, path);
+			if(pa!=null){
+				bean.setPica(pa);
 			}
 		}
-		return m;
+		if(picb!=null && picb.getSize()>0){
+			String pa = Uploader.upload(picb, path);
+			if(pa!=null){
+				bean.setPicb(pa);
+			}
+		}
+		if(picc!=null && picc.getSize()>0){
+			String pa = Uploader.upload(picc, path);
+			if(pa!=null){
+				bean.setPicc(pa);
+			}
+		}
+		if(picd!=null && picd.getSize()>0){
+			String pa = Uploader.upload(picd, path);
+			if(pa!=null){
+				bean.setPicd(pa);
+			}
+		}
+		return biz.updateImage(bean);
 	}
 	
 	@RequestMapping("/enable/{id}/{status}")
