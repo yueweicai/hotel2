@@ -4,6 +4,7 @@
 	<typeAliases>
 		<typeAlias alias="House" type="com.orilore.model.House"/>
 		<typeAlias alias="Kind" type="com.orilore.model.Kind"/>
+		<typeAlias alias="HPrice" type="com.orilore.model.HPrice"/>
 	</typeAliases>
 	<plugins>
 	    <plugin interceptor ="com.github.pagehelper.PageHelper">
@@ -17,5 +18,6 @@
 	<mappers>
 		<mapper resource="com/orilore/model/House.xml"/>
 		<mapper resource="com/orilore/model/Kind.xml"/>
+		<mapper resource="com/orilore/model/HPrice.xml"/>
 	</mappers>
 </configuration>
