@@ -6,6 +6,7 @@
 		<typeAlias alias="Kind" type="com.orilore.model.Kind"/>
 		<typeAlias alias="HPrice" type="com.orilore.model.HPrice"/>
 		<typeAlias alias="Company" type="com.orilore.model.Company"/>
+		<typeAlias alias="Power" type="com.orilore.model.Power"/>
 	</typeAliases>
 	<plugins>
 	    <plugin interceptor ="com.github.pagehelper.PageHelper">
@@ -21,5 +22,6 @@
 		<mapper resource="com/orilore/model/Kind.xml"/>
 		<mapper resource="com/orilore/model/HPrice.xml"/>
 		<mapper resource="com/orilore/model/Company.xml"/>
+		<mapper resource="com/orilore/model/Power.xml"/>
 	</mappers>
 </configuration>
