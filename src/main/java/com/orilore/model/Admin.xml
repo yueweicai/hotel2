@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.AdminMapper">
+	<resultMap type="Admin" id="adminResultMap">
+		<id column="aid" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="status" property="status"/>
+		<collection property="powers" ofType="Power">
+			<id column="id" property="id"/>
+			<result column="pid" property="pid"/>
+			<result column="pname" property="pname"/>
+			<result column="url" property="url"/>
+			<result column="icon" property="icon"/>
+			<result column="xh" property="xh"/>
+		</collection>
+	</resultMap>
+	<select id="selectOne" parameterType="Admin" resultMap="adminResultMap">
+		select a.id aid,a.username,a.password,a.status,
+	    c.id,c.pid,c.pname,c.url,c.icon,c.xh
+	    from admin a left join rule b on a.id=b.aid
+	    left join power c on c.id=b.pid
+		where a.status!=-1 and a.username=#{username} and a.password=#{password}
+	</select>
+	<select id="select" resultType="Power">
+		select * from admin where status!=-1
+	</select>
+	<delete id="delete" parameterType="int">
+		update admin set status=-1 where id=#{id}
+	</delete>
+	<update id="update" parameterType="Admin">
+		update admin set 
+		username=#{username},password=#{password},status=#{status}
+		where id=#{id}
+	</update>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Admin">
+		insert into admin(username,password,status)
+		values(#{username},#{password},#{status})
+	</insert>
+</mapper>
