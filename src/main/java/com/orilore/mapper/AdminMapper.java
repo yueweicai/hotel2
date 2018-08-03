@@ -10,5 +10,6 @@ public interface AdminMapper {
 	public boolean delete(Integer id);
 	public boolean update(Admin bean);
 	public Admin selectOne(Admin bean);
+	public Admin selectById(Integer id);
 	public List<Admin> select();
 }

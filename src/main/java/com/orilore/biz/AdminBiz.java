@@ -1,19 +1,15 @@
 package com.orilore.biz;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.orilore.mapper.AdminMapper;
 import com.orilore.mapper.RuleMapper;
 import com.orilore.model.Admin;
 import com.orilore.model.Rule;
+
 @Service
 public class AdminBiz implements IAdminBiz {
 	@Resource
@@ -29,7 +25,7 @@ public class AdminBiz implements IAdminBiz {
 	//readOnly    事务的只读状态
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
-	public boolean save(Admin bean,int pids[]) {
+	public boolean save(Admin bean,List<Integer> pids) {
 		boolean flag = true;
 		if(bean.getId()!=null){
 			if(mapper.update(bean)){
@@ -74,6 +70,11 @@ public class AdminBiz implements IAdminBiz {
 	@Override
 	public List<Admin> query() {
 		return mapper.select();
+	}
+
+	@Override
+	public Admin get(Integer id) {
+		return mapper.selectById(id);
 	}
 
 }
