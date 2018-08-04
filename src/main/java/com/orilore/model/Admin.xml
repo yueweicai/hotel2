@@ -32,6 +32,7 @@
 	    left join power c on c.id=b.pid
 		where a.status!=-1 and a.username=#{username} and a.password=#{password}
 	</select>
+	
 	<select id="select" resultType="Admin">
 		select * from admin where status!=-1
 	</select>
