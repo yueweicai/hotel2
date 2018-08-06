@@ -32,6 +32,15 @@ public class HPriceCtrl {
 		return biz.remove(id);
 	}
 	
+	@RequestMapping("/get")
+	public HPrice getprice(int kid,String sdate,String edate){
+		Map<String,Object> map = new HashMap<>();
+		map.put("kid", kid);
+		map.put("sdate",sdate);
+		map.put("edate", edate);
+		return biz.query(map);
+	}
+	
 	@RequestMapping("/query")
 	public Map<String,Object> query(int page,int rows){
 		if(page<=0) page = 1;

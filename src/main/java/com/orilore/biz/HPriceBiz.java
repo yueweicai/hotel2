@@ -1,6 +1,7 @@
 package com.orilore.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -36,6 +37,11 @@ public class HPriceBiz implements IHPriceBiz {
 	@Override
 	public HPrice find(Integer id) {
 		return mapper.selectOne(id);
+	}
+
+	@Override
+	public HPrice query(Map<String, Object> map) {
+		return mapper.selectByMap(map);
 	}
 
 }

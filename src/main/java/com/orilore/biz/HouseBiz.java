@@ -47,5 +47,10 @@ public class HouseBiz implements IHouseBiz{
 	public boolean updateImage(House bean) {
 		return this.mapper.updateImage(bean);
 	}
+
+	@Override
+	public List<House> queryHouses(Map<String, Object> map) {
+		return this.mapper.selectByMap(map);
+	}
 }
 

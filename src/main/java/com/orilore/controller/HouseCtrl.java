@@ -28,6 +28,15 @@ public class HouseCtrl {
 	@Resource
 	private IHouseBiz biz;
 	
+	@RequestMapping("/list")
+	public List<House> queryHouses(int kid,String rdate,String ldate){
+		Map<String,Object> map = new HashMap<>();
+		map.put("kid", kid);
+		map.put("rdate", rdate);
+		map.put("ldate", ldate);
+		return biz.queryHouses(map);
+	}
+	
 	@RequestMapping("/query")
 	public Map<String,Object> query(HttpServletRequest request){
 		//封装查询条件

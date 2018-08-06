@@ -19,6 +19,13 @@
 		</association>
 	</resultMap>
 	
+	<select id="selectByMap" parameterType="map" resultType="HPrice">
+		   select * from hprice where kid=#{kid}
+		   and sdate&lt;=#{sdate} 
+		   and edate&gt;=#{edate}
+		   limit 0,1
+	</select>
+	
 	<select id="select" resultMap="priceResultMap">
 		select a.*,b.id idk,b.name,b.icon,b.info,b.status kstatus 
 		from hprice a left join kind b on a.kid=b.id

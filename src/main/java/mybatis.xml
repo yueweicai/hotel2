@@ -9,6 +9,7 @@
 		<typeAlias alias="Power" type="com.orilore.model.Power"/>
 		<typeAlias alias="Admin" type="com.orilore.model.Admin"/>
 		<typeAlias alias="Rule" type="com.orilore.model.Rule"/>
+		<typeAlias alias="Reserve" type="com.orilore.model.Reserve"/>
 	</typeAliases>
 	<plugins>
 	    <plugin interceptor ="com.github.pagehelper.PageHelper">
@@ -27,5 +28,6 @@
 		<mapper resource="com/orilore/model/Power.xml"/>
 		<mapper resource="com/orilore/model/Admin.xml"/>
 		<mapper resource="com/orilore/model/Rule.xml"/>
+		<mapper resource="com/orilore/model/Reserve.xml"/>
 	</mappers>
 </configuration>
