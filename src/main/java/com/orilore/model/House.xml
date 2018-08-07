@@ -33,11 +33,17 @@
 	</select>
 	
 	<select id="selectByMap" parameterType="map" resultType="House">
-		select * from house 
-		where kid=#{kid} and id not in(
-		   select hid from reserve
-		   where rdate&lt;=#{rdate} and ldate&gt;=#{ldate}
-		)
+		  select * from house where kid=#{kid} and id not in(
+		       select hid from (     
+		           select hid from reserve
+		           where (rdate&lt;=#{rdate} and rdate&lt;=#{ldate})
+		           or (ldate&lt;=#{rdate} and ldate&lt;=#{ldate})
+		           union
+		           select hid from record
+		           where (rtime&lt;=#{rdate} and rtime&lt;=#{ldate})
+		           or (ltime&lt;=#{rdate} and ltime&lt;=#{ldate})
+		       ) as a
+		  )
 	</select>
 	
 	<select id="select" parameterType="map" resultMap="houseResultMap">
