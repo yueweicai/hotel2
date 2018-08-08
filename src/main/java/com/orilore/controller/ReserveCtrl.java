@@ -29,6 +29,12 @@ public class ReserveCtrl {
 	public boolean remove(int id){
 		return biz.remove(id);
 	}
+	
+	@RequestMapping("/change")
+	public boolean change(int id){
+		return biz.change(id);
+	}
+	
 	@RequestMapping("/find")
 	public Reserve find(int id){
 		return biz.find(id);

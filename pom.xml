@@ -61,6 +61,14 @@
 		    <artifactId>com.baidu.ueditor</artifactId>
 		    <version>1.1.2-offical</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.baidubce</groupId>
+		    <artifactId>bce-java-sdk</artifactId>
+		    <version>0.10.33</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<build>

@@ -9,5 +9,6 @@ public interface IReserveBiz {
 	public boolean save(Reserve bean);
 	public boolean remove(Integer id);
 	public Reserve find(Integer id);
+	public boolean change(Integer id);
 	public List<Reserve> query(Map<String,Object> map);
 }

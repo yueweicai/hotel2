@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.RecordMapper">
+	<select id="selectOne" parameterType="int" resultType="Record">
+		select * from Record where id=#{0} and status!=-1
+	</select>
+	<select id="select" parameterType="map" resultType="Record">
+		select a.*,b.hname,c.name kname from Record a
+	    left join house b on a.hid=b.id
+	    left join kind c on b.kid=c.id
+	    where a.res!=-1 
+	    <if test="kname!=null"> and c.name=#{kname} </if>
+	    <if test="custom!=null"> and a.custom=#{custom} </if>
+	    <if test="phone!=null"> and a.phone like concat('%',#{phone},'%') </if>
+	    <if test="sdate!=null"> and a.rtime&gt;=#{sdate} </if>
+	    <if test="edate!=null"> and a.ltime&lt;=#{edate} </if>
+	    order by a.id desc
+	</select>
+	<insert id="insert" parameterType="Record">
+		insert into Record(custom,wxnick,phone,persons,ltime,hid,price,total) 
+		values(#{custom},#{wxnick},#{phone},#{persons},#{ltime},#{hid},#{price},#{total})
+	</insert>
+	<delete id="delete" parameterType="int">
+		update Record set status=-1 where id=#{0}
+	</delete>
+	<update id="update" parameterType="Record">
+		update Record set custom=#{custom},wxnick=#{wxnick},phone=#{phone},persons=#{persons},ltime=#{ltime},hid=#{hid},price=#{price},total=#{total} where id=#{id}
+	</update>
+</mapper>
