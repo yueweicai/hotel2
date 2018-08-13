@@ -11,6 +11,7 @@
 		<typeAlias alias="Rule" type="com.orilore.model.Rule"/>
 		<typeAlias alias="Reserve" type="com.orilore.model.Reserve"/>
 		<typeAlias alias="Record" type="com.orilore.model.Record"/>
+		<typeAlias alias="StateBean" type="com.orilore.model.StateBean"/>
 	</typeAliases>
 	<plugins>
 	    <plugin interceptor ="com.github.pagehelper.PageHelper">

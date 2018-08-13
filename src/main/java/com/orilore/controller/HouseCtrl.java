@@ -1,7 +1,5 @@
 package com.orilore.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +16,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.orilore.biz.IHouseBiz;
 import com.orilore.model.House;
+import com.orilore.model.StateBean;
 import com.orilore.util.Uploader;
 
 @RestController
@@ -35,6 +32,11 @@ public class HouseCtrl {
 		map.put("rdate", rdate);
 		map.put("ldate", ldate);
 		return biz.queryHouses(map);
+	}
+	
+	@RequestMapping("/state")
+	public List<StateBean> state(){
+		return this.biz.query();
 	}
 	
 	@RequestMapping("/query")

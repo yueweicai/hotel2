@@ -46,6 +46,11 @@
 		  )
 	</select>
 	
+	<select id="selectByKind" resultType="StateBean">
+		select b.name,count(*) as num from house a 
+		left join kind b on a.kid=b.id GROUP by b.name
+	</select>
+	
 	<select id="select" parameterType="map" resultMap="houseResultMap">
 		select 
 		a.id kid,a.name,a.icon,a.info kinfo,a.status kstatus,b.* 

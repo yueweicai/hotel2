@@ -52,5 +52,10 @@ public class HouseBiz implements IHouseBiz{
 	public List<House> queryHouses(Map<String, Object> map) {
 		return this.mapper.selectByMap(map);
 	}
+
+	@Override
+	public List<StateBean> query() {
+		return this.mapper.selectByKind();
+	}
 }
 

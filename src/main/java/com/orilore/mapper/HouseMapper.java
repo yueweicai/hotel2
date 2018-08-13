@@ -13,6 +13,7 @@ public interface HouseMapper{
 	public House selectOne(Integer id);
 	public boolean enable(House bean);
 	public boolean updateImage(House bean);
+	public List<StateBean> selectByKind();
 	public List<House> select(Map<String,Object> map);
 	public List<House> selectByMap(Map<String,Object> map);
 }
